@@ -1,0 +1,165 @@
+public static void main(String[] args) throws FileNotFoundException, IOException {
+        // TODO code application logic here
+      // AVLnode n =new AVLnode();
+          int i = 0;
+           Scanner scanner = new Scanner(System.in);  
+         File file = new File("dictionary.txt");
+         FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        avlimplementation k=new avlimplementation();
+       fileReader = new FileReader("dictionary.txt");
+            // get the buffered reader "helper" class
+            bufferedReader = new BufferedReader(fileReader);
+            // get a line from the text file
+         
+            String strNextLine;    
+            String[] arrWords = null;
+            while ((strNextLine = bufferedReader.readLine()) != null){
+                arrWords = strNextLine.split(" ");
+                for ( i = 0; i < arrWords.length; i++)
+                    // add the word to the dictionary
+                    if (arrWords[i] != null && arrWords[i].length() > 0){
+                      //  System.out.println(arrWords[i]);
+                        k.insert(arrWords[i]);
+                  }
+       }
+            bufferedReader.close();
+    //print in order of tree
+    System.out.println("tree elements: ");
+           k.printTree(root);
+           
+ System.out.println("enter number of words to insert ");
+      int n = scanner.nextInt();
+//insert word
+int e;
+for(  e=0;e<n;e++){
+System.out.println("enter word to insert: ");
+String ins = scanner.next();
+boolean b= k.search(ins);
+  if(b==true){
+    System.out.println("ERROR already exist "+ ins);
+  }
+  else{
+      System.out.println("element inserted ");
+  k.insert(ins);
+  }
+}
+/*
+  int size=0;
+  size=i+e;
+  System.out.println("size= "+size);
+*/
+long size=file.length();
+System.out.println("Size= "+size);
+  int r=k.height(root);
+    System.out.println("height of tree is: ");
+       System.out.println(r);
+   //search a word
+    System.out.println("enter number of words to search ");
+      int q = scanner.nextInt();
+      int ee;
+      for( ee=0;ee<q;ee++){
+  System.out.println("enter word to search: ");
+String word = scanner.next();
+  boolean m= k.search(word);
+  if(m==true)
+    System.out.println("YES found element "+ word);
+  else
+      System.out.println("NO not found "+word);
+      }
+   //delete a word and print after deletion
+   System.out.println("enter number of words to delete ");
+      int a = scanner.nextInt();
+      int ii;
+      for( ii=0;ii<a;ii++){
+ System.out.println("enter word to delete");
+String w = scanner.next();
+boolean f= k.search(w);
+  if(f==true){
+    System.out.println("YES found element "+ w);
+  k.remove(w);}
+  else
+      System.out.println("error not found to delete "+w);
+      } 
+      /*
+      int sizee=0;
+  sizee=i+ii;
+  System.out.println("size= "+sizee);
+*/
+   // size
+    int h=k.height(root);
+    System.out.println("height of tree is: ");
+       System.out.println(h);
+       
+    System.out.println("tree after deletion: ");
+     k.printTree(root);
+     
+     
+      System.out.println("batch look ups");
+     fileReader = new FileReader("queries.txt");
+            // get the buffered reader "helper" class
+            bufferedReader = new BufferedReader(fileReader);
+            // get a line from the text file
+            String stNextLine;    
+            String[] arrayWords = null;
+                     int j=0;
+            while ((stNextLine = bufferedReader.readLine()) != null){
+                arrayWords = stNextLine.split(" ");
+                
+                for ( i = 0; i < arrayWords.length; i++){
+                   
+                    // add the word to the dictionary
+                    if (arrayWords[i] != null && arrayWords[i].length() > 0){
+                      //  System.out.println(arrWords[i]);
+                       boolean g=k.search(arrayWords[i]);
+                       if(g==true){
+                           j++;
+                          System.out.println(arrayWords[i]+"YES"); 
+                       }
+                       else
+                         System.out.println(arrayWords[i]+"NO");  
+                  }
+            }
+                
+                
+            }
+            System.out.println("Number of elements found: "+j);
+           int x=k.height(root);
+    System.out.println("height of tree is: ");
+       System.out.println(x); 
+                  System.out.println("batch deletion ");
+
+            fileReader = new FileReader("deletions.txt");
+            // get the buffered reader "helper" class
+            bufferedReader = new BufferedReader(fileReader);
+            // get a line from the text file
+            String stNtLine;    
+            String[] arrayWord = null;
+                     
+            while ((stNtLine = bufferedReader.readLine()) != null){
+                arrayWord = stNtLine.split(" ");
+                
+                for ( i = 0; i < arrayWord.length; i++){
+                   
+                    // add the word to the dictionary
+                    if (arrayWord[i] != null && arrayWord[i].length() > 0){
+                      //  System.out.println(arrWords[i]);
+                       boolean g=k.search(arrayWord[i]);
+                       if(g==true){
+                           k.remove(arrayWord[i]);
+                          System.out.println(arrayWord[i]+"will be deleted"); 
+                       }
+                       else
+                         System.out.println(arrayWord[i]+"NOT FOUND");  
+                  }
+            }
+                
+                
+            }
+            int z=k.height(root);
+    System.out.println("height of tree is: ");
+       System.out.println(z);
+            
+}
+}
+
